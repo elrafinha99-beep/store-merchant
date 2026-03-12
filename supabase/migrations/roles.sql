@@ -1,0 +1,12 @@
+CREATE POLICY "Enable delete for users based on user_id" ON public.products AS PERMISSIVE FOR DELETE TO public USING ((( SELECT auth.uid() AS uid) = user_id));        |
+CREATE POLICY "Enable insert for authenticated users only" ON public.products AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (true);                             |
+CREATE POLICY "Enable update for users based on user_id" ON public.products AS PERMISSIVE FOR UPDATE TO public USING ((( SELECT auth.uid() AS uid) = user_id));        |
+CREATE POLICY "Enable users to view their own data only" ON public.products AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id)); |
+CREATE POLICY "Enable delete for users based on user_id" ON public.stores AS PERMISSIVE FOR DELETE TO public USING ((( SELECT auth.uid() AS uid) = user_id));          |
+CREATE POLICY "Enable insert for authenticated users only" ON public.stores AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (true);                               |
+CREATE POLICY "Enable update for users based on user_id" ON public.stores AS PERMISSIVE FOR UPDATE TO public USING ((( SELECT auth.uid() AS uid) = user_id));          |
+CREATE POLICY "Enable users to view their own data only" ON public.stores AS PERMISSIVE FOR SELECT TO authenticated USING ((( SELECT auth.uid() AS uid) = user_id));   |
+CREATE POLICY "Enable delete for users based on user_id" ON public.stores_products AS PERMISSIVE FOR DELETE TO public USING ((1 = 1));                                 |
+CREATE POLICY "Enable insert for authenticated users only" ON public.stores_products AS PERMISSIVE FOR INSERT TO authenticated WITH CHECK (true);                      |
+CREATE POLICY "Enable read access for all users" ON public.stores_products AS PERMISSIVE FOR SELECT TO public USING (true);                                            |
+CREATE POLICY "Update free policy" ON public.stores_products AS PERMISSIVE FOR UPDATE TO public USING ((1 = 1));                                                       |
